@@ -1,6 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Net;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using ZXing;
@@ -9,13 +9,13 @@ public class QRScanner : MonoBehaviour
 {
     WebCamTexture webcamTexture;
     string QrCode = string.Empty;
-    public AudioSource beepSound;
 
     void Start()
     {
         var renderer = GetComponent<RawImage>();
         webcamTexture = new WebCamTexture(512, 512);
-        renderer.material.mainTexture = webcamTexture;
+        renderer.texture = webcamTexture;
+        //renderer.material.mainTexture = webcamTexture;
         StartCoroutine(GetQRCode());
     }
 
@@ -44,5 +44,19 @@ public class QRScanner : MonoBehaviour
             yield return null;
         }
         webcamTexture.Stop();
+    }
+    
+    private void OnGUI()
+    {
+        int w = Screen.width, h = Screen.height;
+
+        GUIStyle style = new GUIStyle();
+
+        Rect rect = new Rect(0, 0, w, h * 2 / 100);
+        style.alignment = TextAnchor.UpperLeft;
+        style.fontSize = h * 2 / 50;
+        style.normal.textColor = new Color(0.0f, 0.0f, 0.5f, 1.0f);
+        string text =QrCode;
+        GUI.Label(rect, text, style);
     }
 }
