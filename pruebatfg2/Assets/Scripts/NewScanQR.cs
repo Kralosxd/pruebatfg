@@ -36,12 +36,12 @@ public class NewScanQR : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        imagen = GameObject.FindWithTag("ImagenCamara"); //el objeto rawimage con el tag imagencamara
-        //var renderer = GetComponent<RawImage>();
-        var renderer = imagen.GetComponent<RawImage>(); //coge el componente rawimage del objeto con el tag de imagencamara
-        webcamTexture = new WebCamTexture(512, 512);
-        renderer.texture = webcamTexture;
-        //renderer.material.mainTexture = webcamTexture;
+        //imagen = GameObject.FindWithTag("ImagenCamara"); //el objeto rawimage con el tag imagencamara
+        ////var renderer = GetComponent<RawImage>();
+        //var renderer = imagen.GetComponent<RawImage>(); //coge el componente rawimage del objeto con el tag de imagencamara
+        //webcamTexture = new WebCamTexture(512, 512);
+        //renderer.texture = webcamTexture;
+        ////renderer.material.mainTexture = webcamTexture;
         
     }
 
@@ -79,6 +79,17 @@ public class NewScanQR : MonoBehaviour
         GetComponent<Renderer>().material = ClickedMaterial;
 
         QrCode = string.Empty; //reinicia la cadena para que se vuelva a iniciar la camara si quieres escanear otro codigo
+
+        //Este fragmento de codigo va aqui en lugar de en start para que la primera vez que inicia la aplicacion funcione la camara porque si no
+        // se ejecuta el start antes de aceptar el permiso de la camara y hay que reiniciar la aplicacion la primera vez que se ejecuta despues de instalarla
+        imagen = GameObject.FindWithTag("ImagenCamara"); //el objeto rawimage con el tag imagencamara
+        //var renderer = GetComponent<RawImage>();
+        var renderer = imagen.GetComponent<RawImage>(); //coge el componente rawimage del objeto con el tag de imagencamara
+        webcamTexture = new WebCamTexture(512, 512);
+        renderer.texture = webcamTexture;
+        //renderer.material.mainTexture = webcamTexture;
+
+
         StartCoroutine(GetQRCode());
 
         //Api.SaveDeviceParams(uri);
