@@ -14,6 +14,7 @@ public class NewScanQR : MonoBehaviour
     string QrCode = string.Empty;
 
     GameObject imagen;
+    
 
     /// <summary>
     /// The material to use when this object is inactive (not being gazed at).
@@ -86,12 +87,13 @@ public class NewScanQR : MonoBehaviour
         //var renderer = GetComponent<RawImage>();
         var renderer = imagen.GetComponent<RawImage>(); //coge el componente rawimage del objeto con el tag de imagencamara
         webcamTexture = new WebCamTexture(512, 512);
+        renderer.enabled = true; //muestra el componente con la camara
         renderer.texture = webcamTexture;
         //renderer.material.mainTexture = webcamTexture;
 
 
         StartCoroutine(GetQRCode());
-
+        
         //Api.SaveDeviceParams(uri);
         //Api.UpdateScreenParams();
 
@@ -122,5 +124,7 @@ public class NewScanQR : MonoBehaviour
             yield return null;
         }
         webcamTexture.Stop();
+
+        imagen.GetComponent<RawImage>().enabled = false;
     }
 }
