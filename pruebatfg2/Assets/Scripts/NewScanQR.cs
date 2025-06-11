@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using ZXing;
 
 using Google.XR.Cardboard;
 
 public class NewScanQR : MonoBehaviour
 {
+
+    WebCamTexture webcamTexture;
+    string QrCode = string.Empty;
+
+    GameObject imagen;
+
     /// <summary>
     /// The material to use when this object is inactive (not being gazed at).
     /// </summary>
@@ -22,11 +31,22 @@ public class NewScanQR : MonoBehaviour
     public Material ClickedMaterial;
 
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-
+        imagen = GameObject.FindWithTag("ImagenCamara"); //el objeto rawimage con el tag imagencamara
+        //var renderer = GetComponent<RawImage>();
+        var renderer = imagen.GetComponent<RawImage>(); //coge el componente rawimage del objeto con el tag de imagencamara
+        webcamTexture = new WebCamTexture(512, 512);
+        renderer.texture = webcamTexture;
+        //renderer.material.mainTexture = webcamTexture;
+        
     }
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -58,8 +78,38 @@ public class NewScanQR : MonoBehaviour
     {
         GetComponent<Renderer>().material = ClickedMaterial;
 
+
+        StartCoroutine(GetQRCode());
+
         //Api.SaveDeviceParams(uri);
         //Api.UpdateScreenParams();
 
+    }
+
+    IEnumerator GetQRCode()
+    {
+        IBarcodeReader barCodeReader = new BarcodeReader();
+        webcamTexture.Play();
+        var snap = new Texture2D(webcamTexture.width, webcamTexture.height, TextureFormat.ARGB32, false);
+        while (string.IsNullOrEmpty(QrCode))
+        {
+            try
+            {
+                snap.SetPixels32(webcamTexture.GetPixels32());
+                var Result = barCodeReader.Decode(snap.GetRawTextureData(), webcamTexture.width, webcamTexture.height, RGBLuminanceSource.BitmapFormat.ARGB32);
+                if (Result != null)
+                {
+                    QrCode = Result.Text;
+                    if (!string.IsNullOrEmpty(QrCode))
+                    {
+                        Debug.Log("DECODED TEXT FROM QR: " + QrCode);
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex) { Debug.LogWarning(ex.Message); }
+            yield return null;
+        }
+        webcamTexture.Stop();
     }
 }
