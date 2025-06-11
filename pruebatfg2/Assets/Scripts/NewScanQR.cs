@@ -78,7 +78,7 @@ public class NewScanQR : MonoBehaviour
     {
         GetComponent<Renderer>().material = ClickedMaterial;
 
-
+        QrCode = string.Empty; //reinicia la cadena para que se vuelva a iniciar la camara si quieres escanear otro codigo
         StartCoroutine(GetQRCode());
 
         //Api.SaveDeviceParams(uri);
