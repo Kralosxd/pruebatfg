@@ -11,7 +11,7 @@ public class NewScanQR : MonoBehaviour
 {
 
     WebCamTexture webcamTexture;
-    string QrCode = string.Empty;
+    public string QrCode = string.Empty;
 
     GameObject imagen;
     
