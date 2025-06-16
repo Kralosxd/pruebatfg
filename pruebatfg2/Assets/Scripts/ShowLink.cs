@@ -21,6 +21,7 @@ public class ShowLink : MonoBehaviour
     void Update()
     {
         qrurl = scancube.GetComponent<NewScanQR>().QrCode;
+        longurl = scancube.GetComponent<UnshortenURL>().myLongURL;
         text1.SetText("QR Url: " + qrurl);
         text2.SetText("Long Url: " + longurl);
     }

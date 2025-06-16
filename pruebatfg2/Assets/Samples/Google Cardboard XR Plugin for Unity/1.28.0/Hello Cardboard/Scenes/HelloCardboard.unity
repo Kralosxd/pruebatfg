@@ -395,6 +395,7 @@ GameObject:
   - component: {fileID: 355108090}
   - component: {fileID: 355108089}
   - component: {fileID: 355108093}
+  - component: {fileID: 355108094}
   m_Layer: 7
   m_Name: ScanCube
   m_TagString: Untagged
@@ -512,6 +513,19 @@ MonoBehaviour:
   InactiveMaterial: {fileID: 2100000, guid: 01d03e13895328245947e86721e49eeb, type: 2}
   GazedAtMaterial: {fileID: 2100000, guid: 2828bccfb8d81fe4aae6f5a86a884ce4, type: 2}
   ClickedMaterial: {fileID: 2100000, guid: c9761d8f7e1fb1b41ae23818c5c21847, type: 2}
+--- !u!114 &355108094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355108088}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90520397dec7de40ab6c224244c245d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLongURL: 
 --- !u!1 &363007745
 GameObject:
   m_ObjectHideFlags: 0

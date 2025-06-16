@@ -126,5 +126,6 @@ public class NewScanQR : MonoBehaviour
         webcamTexture.Stop();
 
         imagen.GetComponent<RawImage>().enabled = false;
+        GetComponent<UnshortenURL>().enabled = true; //activa el script que llama a la API para obtener la url larga
     }
 }
