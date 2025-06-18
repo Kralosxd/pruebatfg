@@ -12,6 +12,7 @@ public class NewScanQR : MonoBehaviour
 
     WebCamTexture webcamTexture;
     public string QrCode = string.Empty;
+    
 
     GameObject imagen;
     
@@ -81,6 +82,13 @@ public class NewScanQR : MonoBehaviour
 
         QrCode = string.Empty; //reinicia la cadena para que se vuelva a iniciar la camara si quieres escanear otro codigo
 
+        //if (GetComponent<UnshortenURL>().enabled == true)  // reinicia la cadena con la url larga y desactiva el script para que se vuelva a iniciar despues
+        //{
+            //GetComponent<UnshortenURL>().myLongURL = string.Empty;
+            GetComponent<UnshortenURL>().goodurl = string.Empty;
+            //GetComponent<UnshortenURL>().enabled = false;
+        //}
+
         //Este fragmento de codigo va aqui en lugar de en start para que la primera vez que inicia la aplicacion funcione la camara porque si no
         // se ejecuta el start antes de aceptar el permiso de la camara y hay que reiniciar la aplicacion la primera vez que se ejecuta despues de instalarla
         imagen = GameObject.FindWithTag("ImagenCamara"); //el objeto rawimage con el tag imagencamara
@@ -127,6 +135,7 @@ public class NewScanQR : MonoBehaviour
         webcamTexture.Stop();
 
         imagen.GetComponent<RawImage>().enabled = false;
-        GetComponent<UnshortenURL>().enabled = true; //activa el script que llama a la API para obtener la url larga
+        //GetComponent<UnshortenURL>().enabled = true; //activa el script que llama a la API para obtener la url larga
+        GetComponent<UnshortenURL>().Init(); // llama a Init() para iniciar el script
     }
 }

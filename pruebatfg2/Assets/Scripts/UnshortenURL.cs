@@ -14,9 +14,16 @@ public class UnshortenURL : MonoBehaviour
 
     void Start()
     {
+        //scancube = GameObject.Find("ScanCube");
+        //myShortURL = scancube.GetComponent<NewScanQR>().QrCode;
+        ////StartCoroutine(GetRequest("https://unshorten.me/s/" + myShortURL));
+        //StartCoroutine(GetRequest("https://api.redirect-checker.net/?url=" + myShortURL));
+    }
+
+    public void Init()
+    {
         scancube = GameObject.Find("ScanCube");
         myShortURL = scancube.GetComponent<NewScanQR>().QrCode;
-        //StartCoroutine(GetRequest("https://unshorten.me/s/" + myShortURL));
         StartCoroutine(GetRequest("https://api.redirect-checker.net/?url=" + myShortURL));
     }
 
