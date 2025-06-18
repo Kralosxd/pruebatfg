@@ -112,7 +112,8 @@ public class NewScanQR : MonoBehaviour
                 var Result = barCodeReader.Decode(snap.GetRawTextureData(), webcamTexture.width, webcamTexture.height, RGBLuminanceSource.BitmapFormat.ARGB32);
                 if (Result != null)
                 {
-                    QrCode = Result.Text;
+                    QrCode = Result.Text; //devuelve el enlace con https
+                    QrCode = QrCode.Remove(4, 1); // borra la s de https para que al expandir el enlace devuelva la url correcta. Hay casos en los que no devuelve la correcta con http tampoco.
                     if (!string.IsNullOrEmpty(QrCode))
                     {
                         Debug.Log("DECODED TEXT FROM QR: " + QrCode);
