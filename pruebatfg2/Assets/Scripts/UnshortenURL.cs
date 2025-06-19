@@ -11,6 +11,7 @@ public class UnshortenURL : MonoBehaviour
     string myShortURL;
     public string myLongURL = string.Empty;
     public string goodurl = string.Empty;
+    public string paramsstring = string.Empty;
 
     void Start()
     {
@@ -56,6 +57,7 @@ public class UnshortenURL : MonoBehaviour
                     
                     if (!string.IsNullOrEmpty(goodurl)) {
                     goodurl = getBetween(goodurl, "http:\\/\\/google.com\\/cardboard\\/cfg?p=", "\"");
+                        paramsstring = goodurl;
                     }
 
                     goodurl = "http://google.com/cardboard/cfg?p=" + goodurl;
@@ -63,6 +65,7 @@ public class UnshortenURL : MonoBehaviour
                     //string[] urlsplit = myLongURL.Split('=');
                     //goodurl = "http://google.com/cardboard/cfg?p=" + urlsplit[1];
                     Api.SaveDeviceParams(goodurl);
+                    GetComponent<ModifyParams>().Init(); //llama a init de modifyparams
                     break;
             }
         }
