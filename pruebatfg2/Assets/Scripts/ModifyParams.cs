@@ -48,18 +48,31 @@ public class ModifyParams : MonoBehaviour
     public void ModifyILD()
     {
         myDP.InterLensDistance += 0.001f;
-        //textcurrentild.SetText("Current ILD: " + myDP.InterLensDistance);
+        textcurrentild.SetText("Current ILD: " + myDP.InterLensDistance);
+        
 
         Stream s1;
-        if (File.Exists("Assets/prueba"))
-            s1 = new FileStream("Assets/prueba", FileMode.Truncate);
+        //if (File.Exists("Assets/prueba"))
+        //    s1 = new FileStream("Assets/prueba", FileMode.Truncate);
+        //else {
+        //    s1 = new FileStream("Assets/prueba", FileMode.Create);
+        //    textcurrentild.SetText("Current ILD: " + myDP);
+        //}
+
+        if (File.Exists(Application.persistentDataPath + "/prueba")) { //en android hay que usar Application.persistentDataPath para poder guardar archivos
+            s1 = new FileStream(Application.persistentDataPath + "/prueba", FileMode.Truncate);
+        }
         else
-            s1 = new FileStream("Assets/prueba", FileMode.Create);
+        {
+                s1 = new FileStream(Application.persistentDataPath + "/prueba", FileMode.Create);
+            }
+
         pb::CodedOutputStream myOutput = new pb::CodedOutputStream(s1);
         myDP.WriteTo(myOutput);
         myOutput.Dispose();
 
-        string path = "Assets/prueba";
+        //string path = "Assets/prueba";
+        string path = Application.persistentDataPath + "/prueba";
         byte[] myBytes = File.ReadAllBytes(path);
         string myBase64String = Convert.ToBase64String(myBytes);
 
