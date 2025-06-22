@@ -65,7 +65,7 @@ public class UnshortenURL : MonoBehaviour
                     //string[] urlsplit = myLongURL.Split('=');
                     //goodurl = "http://google.com/cardboard/cfg?p=" + urlsplit[1];
                     Api.SaveDeviceParams(goodurl);
-                    GetComponent<ModifyParams>().Init(); //llama a init de modifyparams
+                    scancube.GetComponent<ModifyParams>().Init(); //llama a init de modifyparams
                     break;
             }
         }

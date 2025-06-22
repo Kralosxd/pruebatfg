@@ -122,6 +122,11 @@ public class NewScanQR : MonoBehaviour
                 {
                     QrCode = Result.Text; //devuelve el enlace con https
                     QrCode = QrCode.Remove(4, 1); // borra la s de https para que al expandir el enlace devuelva la url correcta. Hay casos en los que no devuelve la correcta con http tampoco.
+                    string[] parts = QrCode.Split('/'); //separa el enlace en partes con /
+                    if (parts[0].StartsWith("g")) { 
+                    QrCode = "http://goo.gl/" + parts[1]; //hay links con el formato goo.l/GvHq4R que no los expande por lo que se cogen los caracteres del final del link y se añaden a http://goo.gl/
+                    }
+
                     if (!string.IsNullOrEmpty(QrCode))
                     {
                         Debug.Log("DECODED TEXT FROM QR: " + QrCode);

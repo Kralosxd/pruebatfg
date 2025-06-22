@@ -394,7 +394,8 @@ GameObject:
   - component: {fileID: 312455120}
   - component: {fileID: 312455119}
   - component: {fileID: 312455118}
-  m_Layer: 0
+  - component: {fileID: 312455122}
+  m_Layer: 7
   m_Name: arrow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +447,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6961686485990620184, guid: 6039420f01e176849a1c856e1355e923, type: 3}
+  - {fileID: 2100000, guid: 01d03e13895328245947e86721e49eeb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -491,6 +492,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 90}
+--- !u!114 &312455122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312455117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f5cd573305adb4d9418efd692a0a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InactiveMaterial: {fileID: 2100000, guid: 01d03e13895328245947e86721e49eeb, type: 2}
+  GazedAtMaterial: {fileID: 2100000, guid: 2828bccfb8d81fe4aae6f5a86a884ce4, type: 2}
+  ClickedMaterial: {fileID: 2100000, guid: c9761d8f7e1fb1b41ae23818c5c21847, type: 2}
 --- !u!1 &355108088
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e874141f77ec03f40a9c101743c4ad3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textcurrentild: {fileID: 822444358}
 --- !u!1 &363007745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Current ILD: '
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3437,7 +3454,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6961686485990620184, guid: 6039420f01e176849a1c856e1355e923, type: 3}
+  - {fileID: 2100000, guid: 01d03e13895328245947e86721e49eeb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3494,7 +3511,8 @@ GameObject:
   - component: {fileID: 4172487438062060102}
   - component: {fileID: 3461634206819538136}
   - component: {fileID: 8792480914814986454}
-  m_Layer: 0
+  - component: {fileID: 8792480914814986455}
+  m_Layer: 7
   m_Name: arrow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3523,6 +3541,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2816119944088101400, guid: 6039420f01e176849a1c856e1355e923, type: 3}
+--- !u!114 &8792480914814986455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792480914814986453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f5cd573305adb4d9418efd692a0a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InactiveMaterial: {fileID: 2100000, guid: 01d03e13895328245947e86721e49eeb, type: 2}
+  GazedAtMaterial: {fileID: 2100000, guid: 2828bccfb8d81fe4aae6f5a86a884ce4, type: 2}
+  ClickedMaterial: {fileID: 2100000, guid: c9761d8f7e1fb1b41ae23818c5c21847, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
