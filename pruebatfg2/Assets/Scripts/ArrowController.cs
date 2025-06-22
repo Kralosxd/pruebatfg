@@ -8,6 +8,7 @@ public class ArrowController : MonoBehaviour
 {
 
     GameObject scancube;
+    public int arrowclicked = 0;
 
     /// <summary>
     /// The material to use when this object is inactive (not being gazed at).
@@ -61,7 +62,13 @@ public class ArrowController : MonoBehaviour
     public void OnPointerClick()
     {
         GetComponent<Renderer>().material = ClickedMaterial;
-
+        if (gameObject.name == "arrow1") { //para que el if de ModifyILD sume o reste
+            arrowclicked = 1; 
+        }
+        else if (gameObject.name == "arrow2")
+        {
+            arrowclicked = 2;
+        }
         scancube.GetComponent<ModifyParams>().ModifyILD();
 
     }

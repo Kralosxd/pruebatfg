@@ -18,11 +18,15 @@ public class ModifyParams : MonoBehaviour
     DeviceParams myDP = new DeviceParams();
 
     public TextMeshProUGUI textcurrentild;
+    GameObject arrow1;
+    GameObject arrow2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         scancube = GameObject.Find("ScanCube");
+        arrow1 = GameObject.Find("arrow1");
+        arrow2 = GameObject.Find("arrow2");
     }
 
     // Update is called once per frame
@@ -47,7 +51,14 @@ public class ModifyParams : MonoBehaviour
 
     public void ModifyILD()
     {
-        myDP.InterLensDistance += 0.001f;
+        if (arrow1.GetComponent<ArrowController>().arrowclicked == 1)
+            myDP.InterLensDistance += 0.001f;
+        else if (arrow2.GetComponent<ArrowController>().arrowclicked == 2)
+            myDP.InterLensDistance -= 0.001f;
+
+        arrow1.GetComponent<ArrowController>().arrowclicked = 0;
+        arrow2.GetComponent<ArrowController>().arrowclicked = 0;
+
         textcurrentild.SetText("Current ILD: " + myDP.InterLensDistance);
         
 
