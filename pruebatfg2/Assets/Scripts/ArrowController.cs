@@ -61,6 +61,7 @@ public class ArrowController : MonoBehaviour
     /// </summary>
     public void OnPointerClick()
     {
+        if (scancube.GetComponent<ModifyParams>().waitarrow == 0) { 
         GetComponent<Renderer>().material = ClickedMaterial;
         if (gameObject.name == "arrow1") { //para que el if de ModifyILD sume o reste
             arrowclicked = 1; 
@@ -70,6 +71,6 @@ public class ArrowController : MonoBehaviour
             arrowclicked = 2;
         }
         scancube.GetComponent<ModifyParams>().ModifyILD();
-
+        }
     }
 }

@@ -120,12 +120,36 @@ public class NewScanQR : MonoBehaviour
                 var Result = barCodeReader.Decode(snap.GetRawTextureData(), webcamTexture.width, webcamTexture.height, RGBLuminanceSource.BitmapFormat.ARGB32);
                 if (Result != null)
                 {
-                    QrCode = Result.Text; //devuelve el enlace con https
-                    QrCode = QrCode.Remove(4, 1); // borra la s de https para que al expandir el enlace devuelva la url correcta. Hay casos en los que no devuelve la correcta con http tampoco.
-                    string[] parts = QrCode.Split('/'); //separa el enlace en partes con /
-                    if (parts[0].StartsWith("g")) { 
-                    QrCode = "http://goo.gl/" + parts[1]; //hay links con el formato goo.l/GvHq4R que no los expande por lo que se cogen los caracteres del final del link y se añaden a http://goo.gl/
+                    QrCode = Result.Text; //devuelve el enlace corto con https (normalmente)
+
+                    if (QrCode.StartsWith("google.com/cardboard/cfg?p")) //en caso de que devuelva el link largo directamente sin http
+                    {
+                        QrCode = "http://" + QrCode;
                     }
+                    else if (QrCode.StartsWith("http://google.com/cardboard/cfg?p")) //en caso de que devuelva el link largo con http
+                    {
+
+                    }
+                    else if (QrCode.StartsWith("https://google.com/cardboard/cfg?p")) //en caso de que devuelva el link largo con https
+                    {
+                        QrCode = QrCode.Remove(4, 1); //borra la s de https
+                        
+                    }
+
+                    else
+                    {
+                        if (QrCode.StartsWith("https"))
+                        {
+                            QrCode = QrCode.Remove(4, 1); // borra la s de https para que al expandir el enlace devuelva la url correcta. Hay casos en los que no devuelve la correcta con http tampoco.
+                        }
+
+                        string[] parts = QrCode.Split('/'); //separa el enlace en partes con /
+                        if (parts[0].StartsWith("g"))
+                        {
+                            QrCode = "http://goo.gl/" + parts[1]; //hay links con el formato goo.l/GvHq4R que no los expande por lo que se cogen los caracteres del final del link y se añaden a http://goo.gl/
+                        }
+                    }
+                   
 
                     if (!string.IsNullOrEmpty(QrCode))
                     {

@@ -20,6 +20,8 @@ public class ModifyParams : MonoBehaviour
     public TextMeshProUGUI textcurrentild;
     GameObject arrow1;
     GameObject arrow2;
+    public int waitarrow = 0;
+    float changeild;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,10 +53,19 @@ public class ModifyParams : MonoBehaviour
 
     public void ModifyILD()
     {
-        if (arrow1.GetComponent<ArrowController>().arrowclicked == 1)
-            myDP.InterLensDistance += 0.001f;
-        else if (arrow2.GetComponent<ArrowController>().arrowclicked == 2)
-            myDP.InterLensDistance -= 0.001f;
+        waitarrow = 1;
+
+        changeild = myDP.InterLensDistance;
+        if (arrow1.GetComponent<ArrowController>().arrowclicked == 1) {
+            //myDP.InterLensDistance += 0.001f;
+            changeild += 0.001f;
+        }
+        else if (arrow2.GetComponent<ArrowController>().arrowclicked == 2) {
+            //myDP.InterLensDistance -= 0.001f;
+            changeild -= 0.001f;
+        }
+        //myDP.InterLensDistance = (float)System.Math.Round(myDP.InterLensDistance, 4);
+        myDP.InterLensDistance = (float)System.Math.Round(changeild, 4);
 
         arrow1.GetComponent<ArrowController>().arrowclicked = 0;
         arrow2.GetComponent<ArrowController>().arrowclicked = 0;
@@ -89,6 +100,8 @@ public class ModifyParams : MonoBehaviour
 
         myBase64String = "http://google.com/cardboard/cfg?p=" + myBase64String;
         Api.SaveDeviceParams(myBase64String);
+
+        waitarrow = 0;
     }
 
     
