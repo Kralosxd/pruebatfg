@@ -22,6 +22,7 @@ public class ModifyParams : MonoBehaviour
     GameObject arrow2;
     public int waitarrow = 0;
     float changeild;
+    public TextMeshProUGUI textdebug;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,7 +43,21 @@ public class ModifyParams : MonoBehaviour
     {
         
         paramsbase64string = scancube.GetComponent<UnshortenURL>().paramsstring;
-        
+
+        if (paramsbase64string.Length % 4 == 0) {   //la longitud de la cadena tiene que ser multiplo de 4 y si no lo es se rellena con =
+
+        }
+        else if (paramsbase64string.Length % 4 == 1) {
+            paramsbase64string += "=";
+        }
+        else if (paramsbase64string.Length % 4 == 2) {
+            paramsbase64string += "==";
+        }
+
+        paramsbase64string = paramsbase64string.Replace("-", "+"); //la cadena es base64url por lo que hay que sustituir los - con + y los _ con / para que funcione Convert
+        paramsbase64string = paramsbase64string.Replace("_", "/");
+
+        textdebug.SetText(paramsbase64string);
 
         byte[] myBase64EncodedBytes = Convert.FromBase64String(paramsbase64string); //no funciona con algunas cadenas
         
