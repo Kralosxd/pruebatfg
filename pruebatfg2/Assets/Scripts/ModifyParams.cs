@@ -57,11 +57,12 @@ public class ModifyParams : MonoBehaviour
         paramsbase64string = paramsbase64string.Replace("-", "+"); //la cadena es base64url por lo que hay que sustituir los - con + y los _ con / para que funcione Convert
         paramsbase64string = paramsbase64string.Replace("_", "/");
 
-        textdebug.SetText(paramsbase64string);
+        //textdebug.SetText(paramsbase64string);
 
         byte[] myBase64EncodedBytes = Convert.FromBase64String(paramsbase64string); //no funciona con algunas cadenas
         
         myDP = DeviceParams.Parser.ParseFrom(myBase64EncodedBytes);
+        myDP.InterLensDistance = (float)System.Math.Round(myDP.InterLensDistance, 4);
         textcurrentild.SetText("Current ILD: " + myDP.InterLensDistance);
 
     }
@@ -113,7 +114,13 @@ public class ModifyParams : MonoBehaviour
         byte[] myBytes = File.ReadAllBytes(path);
         string myBase64String = Convert.ToBase64String(myBytes);
 
+        myBase64String = myBase64String.Replace("+", "-"); //se sustituyen de vuelta + con - y / con _ y se quitan los = para que funcione savedeviceparams
+        myBase64String = myBase64String.Replace("/", "_");
+        myBase64String = myBase64String.Replace("=", string.Empty);
+
+
         myBase64String = "http://google.com/cardboard/cfg?p=" + myBase64String;
+        textdebug.SetText(myBase64String);
         Api.SaveDeviceParams(myBase64String);
 
         waitarrow = 0;
