@@ -20,6 +20,7 @@ public class ModifyParams : MonoBehaviour
     public TextMeshProUGUI textcurrentild;
     GameObject arrow1;
     GameObject arrow2;
+    GameObject cube1;
     public int waitarrow = 0;
     float changeild;
     public TextMeshProUGUI textdebug;
@@ -30,6 +31,7 @@ public class ModifyParams : MonoBehaviour
         scancube = GameObject.Find("ScanCube");
         arrow1 = GameObject.Find("arrow1");
         arrow2 = GameObject.Find("arrow2");
+        cube1 = GameObject.Find("cube1");
     }
 
     // Update is called once per frame
@@ -87,7 +89,15 @@ public class ModifyParams : MonoBehaviour
         arrow2.GetComponent<ArrowController>().arrowclicked = 0;
 
         textcurrentild.SetText("Current ILD: " + myDP.InterLensDistance);
-        
+
+
+        MySaveParams();
+
+        waitarrow = 0;
+    }
+
+    public void MySaveParams()
+    {
 
         Stream s1;
         //if (File.Exists("Assets/prueba"))
@@ -97,13 +107,14 @@ public class ModifyParams : MonoBehaviour
         //    textcurrentild.SetText("Current ILD: " + myDP);
         //}
 
-        if (File.Exists(Application.persistentDataPath + "/prueba")) { //en android hay que usar Application.persistentDataPath para poder guardar archivos
+        if (File.Exists(Application.persistentDataPath + "/prueba"))
+        { //en android hay que usar Application.persistentDataPath para poder guardar archivos
             s1 = new FileStream(Application.persistentDataPath + "/prueba", FileMode.Truncate);
         }
         else
         {
-                s1 = new FileStream(Application.persistentDataPath + "/prueba", FileMode.Create);
-            }
+            s1 = new FileStream(Application.persistentDataPath + "/prueba", FileMode.Create);
+        }
 
         pb::CodedOutputStream myOutput = new pb::CodedOutputStream(s1);
         myDP.WriteTo(myOutput);
@@ -123,7 +134,17 @@ public class ModifyParams : MonoBehaviour
         textdebug.SetText(myBase64String);
         Api.SaveDeviceParams(myBase64String);
 
-        waitarrow = 0;
+    }
+
+    public void ModILDNumber() //se llama desde numbercontroller
+    {
+
+        changeild = myDP.InterLensDistance;
+        if (cube1.GetComponent<NumberController>().numberclicked == 1) //esto no tengo que hacerlo asi porque si no tendria que repetir el codigo para cada cubo
+        {
+
+        }
+
     }
 
     
