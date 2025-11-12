@@ -21,9 +21,24 @@ public class ModifyParams : MonoBehaviour
     GameObject arrow1;
     GameObject arrow2;
     GameObject cube1;
+    GameObject cube2;
+    GameObject cube3;
+    GameObject cube4;
+    GameObject cube5;
+    GameObject cube6;
+    GameObject cube7;
+    GameObject cube8;
+    GameObject cube9;
+    GameObject cube0;
+    GameObject cubecoma;
+    GameObject cubedel;
+    public int numberclicked;
     public int waitarrow = 0;
     float changeild;
     public TextMeshProUGUI textdebug;
+
+    public TextMeshProUGUI textildmanual;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +46,18 @@ public class ModifyParams : MonoBehaviour
         scancube = GameObject.Find("ScanCube");
         arrow1 = GameObject.Find("arrow1");
         arrow2 = GameObject.Find("arrow2");
-        cube1 = GameObject.Find("cube1");
+        cube1 = GameObject.Find("Cube1");
+        cube2 = GameObject.Find("Cube2");
+        cube3 = GameObject.Find("Cube3");
+        cube4 = GameObject.Find("Cube4");
+        cube5 = GameObject.Find("Cube5");
+        cube6 = GameObject.Find("Cube6");
+        cube7 = GameObject.Find("Cube7");
+        cube8 = GameObject.Find("Cube8");
+        cube9 = GameObject.Find("Cube9");
+        cube0 = GameObject.Find("Cube0");
+        cubecoma = GameObject.Find("Cubecoma");
+        cubedel = GameObject.Find("Cubedel");
     }
 
     // Update is called once per frame
@@ -139,13 +165,99 @@ public class ModifyParams : MonoBehaviour
     public void ModILDNumber() //se llama desde numbercontroller
     {
 
-        changeild = myDP.InterLensDistance;
-        if (cube1.GetComponent<NumberController>().numberclicked == 1) //esto no tengo que hacerlo asi porque si no tendria que repetir el codigo para cada cubo
-        {
+        //int numero = cube1.GetComponent<NumberController>().numberclicked; //hay que usar el numberclicked de cada cube
 
+        //changeild = myDP.InterLensDistance;
+        //if (numero == 1) //quiza hacerlo tambien con un switch
+        //{
+        //    textildmanual.SetText(textildmanual.text + "1");
+
+        //}
+
+        if (textildmanual.text.Length < 2) { //para no poder escribir mas de dos numeros
+        switch (numberclicked) //uso directamente numberclicked de este script en vez de cogerlo de numbercontroller
+        {
+            case 1:
+                textildmanual.SetText(textildmanual.text + "1");
+                break;
+            case 2:
+                textildmanual.SetText(textildmanual.text + "2");
+                break;
+            case 3:
+                textildmanual.SetText(textildmanual.text + "3");
+                break;
+            case 4:
+                textildmanual.SetText(textildmanual.text + "4");
+                break;
+            case 5:
+                textildmanual.SetText(textildmanual.text + "5");
+                break;
+            case 6:
+                textildmanual.SetText(textildmanual.text + "6");
+                break;
+            case 7:
+                textildmanual.SetText(textildmanual.text + "7");
+                break;
+            case 8:
+                textildmanual.SetText(textildmanual.text + "8");
+                break;
+            case 9:
+                textildmanual.SetText(textildmanual.text + "9");
+                break;
+            case 0:
+                textildmanual.SetText(textildmanual.text + "0");
+                break;
+            case 10:
+                textildmanual.SetText(textildmanual.text + ",");
+                break;
+            //case 11:
+            //    string s = textildmanual.text;
+            //    s = s.Remove(s.Length - 1);
+            //    textildmanual.text = s;
+            //    break;
+            //case 12:
+            //    ModILDmanual();
+            //    break;
+            default:
+                break;
         }
+        }
+        switch (numberclicked)
+        {
+            case 11:
+                string s = textildmanual.text;
+                s = s.Remove(s.Length - 1);
+                textildmanual.text = s;
+                break;
+            case 12:
+                ModILDmanual();
+                break;
+            default:
+                break;
+        }
+
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    if (numero == i)
+        //    {
+        //        textildmanual.SetText(textildmanual.text + i.ToString);
+        //    }
+        //}
+
 
     }
 
-    
+
+    public void ModILDmanual()
+    {
+        //myDP.InterLensDistance = Convert.ToSingle(textildmanual.text);
+
+        string nuevoild = "0,0" + textildmanual.text;
+        myDP.InterLensDistance = float.Parse(nuevoild);
+
+        MySaveParams();
+    }
+
+
+
 }
